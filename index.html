@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Daby - Cursos de Inglês</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos gerais para um visual escuro e moderno */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+            color: #ffffff;
+            /* Usamos line-height padrão para evitar espaçamento excessivo */
+            line-height: 1.6;
+        }
+
+        /* Netflix-style background gradient */
+        .netflix-bg {
+            position: relative;
+            background: radial-gradient(circle at top, #141414, #000000);
+            min-height: 100vh;
+        }
+
+        /* Animação para o efeito de "brilho" da logo */
+        @keyframes golden-glow {
+            0%, 100% { text-shadow: 0 0 5px #ffc700, 0 0 10px #ffc700; }
+            50% { text-shadow: 0 0 20px #ffc700, 0 0 40px #ffc700, 0 0 50px #ffc700; }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            text-shadow: 0 0 5px #ffc700;
+        }
+
+        .hero-title:hover {
+            color: #E50914;
+            animation: golden-glow 2s infinite;
+        }
+
+        /* Efeito de hover no estilo Netflix para os cards */
+        .course-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+        }
+
+        .course-card:hover {
+            transform: scale(1.15) translateY(-20px);
+            z-index: 20;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px 5px rgba(229, 9, 20, 0.4);
+        }
+
+        .course-card .card-content {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0));
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .course-card:hover .card-content {
+            display: block;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="netflix-bg">
+
+    <!-- Fundo dinâmico com imagem e gradiente - inspirado no Netflix -->
+    <div class="absolute inset-0 z-0 opacity-10" style="background-image: url('https://placehold.co/1920x1080/141414/ffffff?text=Professional+Learning'); background-size: cover; background-position: center; filter: blur(2px);"></div>
+
+    <!-- Container principal com conteúdo -->
+    <main class="relative z-10 px-4 py-8 md:px-12">
+        
+        <!-- Seção Hero/Destaque -->
+        <header class="flex flex-col items-center justify-center min-h-[60vh] text-center mb-16">
+            <h1 class="hero-title text-white">Teacher Daby's English Courses</h1>
+            <p class="text-xl md:text-2xl mt-4 max-w-2xl">
+                Bem-vindo ao **English Hub**, onde você pode aprimorar seu inglês para diversos fins, do uso diário à comunicação profissional altamente especializada.
+            </p>
+            <p class="text-gray-400 text-lg mt-2">
+                💡 Clique em qualquer curso para ver mais detalhes!
+            </p>
+        </header>
+
+        <!-- Seção de marketing - Foco no problema e solução -->
+        <section class="my-16 max-w-3xl mx-auto text-center">
+            <p class="text-3xl font-bold mb-4 text-[#E50914]">
+                Profissional brasileiro, seu inglês está travando sua carreira?
+            </p>
+            <div class="flex flex-wrap justify-center gap-8 mt-8">
+                <div class="flex flex-col items-center max-w-xs">
+                    <i class="fas fa-arrow-right text-yellow-500 mb-2"></i>
+                    <p class="text-gray-300">Estuda, mas o inglês não flui.</p>
+                </div>
+                <div class="flex flex-col items-center max-w-xs">
+                    <i class="fas fa-arrow-right text-yellow-500 mb-2"></i>
+                    <p class="text-gray-300">Perde oportunidades por medo de falar.</p>
+                </div>
+                <div class="flex flex-col items-center max-w-xs">
+                    <i class="fas fa-arrow-right text-yellow-500 mb-2"></i>
+                    <p class="text-gray-300">Odeia gramática e métodos ultrapassados.</p>
+                </div>
+            </div>
+            <p class="text-xl mt-8 italic text-gray-400">
+                Eu ajudo profissionais brasileiros a falarem inglês com confiança, clareza e impacto — para crescer na carreira e conquistar oportunidades internacionais.
+            </p>
+        </section>
+
+        <!-- Seção de Cursos: 'General English' -->
+        <section class="mt-16">
+            <h2 class="text-2xl font-semibold mb-6">🗣️ General English</h2>
+            <div class="flex flex-col md:flex-row flex-wrap gap-6 items-center">
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/374151/ffffff?text=Effortless+Grammar');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">📝 Effortless Grammar</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Conquiste clareza e confiança na comunicação. Domine a gramática inglesa de forma fácil e eficaz, construindo frases perfeitas sem complicação. Seu inglês, elevado.</p>
+                    </div>
+                </div>
+
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Grammar+Logos');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🧠 Grammar Logos</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Vá além das regras e mergulhe na lógica da linguagem. **Grammar Logos** é o seu caminho para a precisão linguística avançada, desvendando os padrões intrincados que governam uma comunicação verdadeiramente impactante...</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Lexicon+Lumina');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">✨ Lexicon Lumina</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Eleve sua mestria no inglês ao nível mais sublime. **Lexicon Lumina** é o seu portal para as **expressões mais avançadas e autênticas** usadas por nativos, desvendando as nuances que transformam um bom inglês em um inglês brilhante. Aprofunde-se em idiomatismos complexos, coloquialismos sofisticados e frases que só os verdadeiros falantes dominam, garantindo que sua comunicação seja não apenas impecável, mas verdadeiramente luminosa e inesquecível.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Small+Talk');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🗣️ Small Talk</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Acabe com o silêncio constrangedor! **Engaging Small Talk** te ensina a iniciar e manter conversas cativantes em qualquer situação. Ganhe confiança para interagir em eventos sociais, networking e no dia a dia, transformando o "papo rápido" em conexões reais e significativas. Fale com leveza e autenticidade.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Flawless+English');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">💎 Flawless English</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Cansado de cometer erros em inglês? **Flawless English** é o seu guia para eliminá-los. Domine as armadilhas de gramática, vocabulário e pronúncia. Comunique-se com confiança, precisão e profissionalismo, garantindo um inglês impecável.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Travel+English');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">✈️ Travel English Essentials</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Desbrave o mundo com confiança! **Travel English Essentials** prepara você para cada etapa da viagem: do check-in à imigração, de restaurantes a emergências. Aprenda frases práticas, vocabulário essencial e dicas culturais para se comunicar sem barreiras e aproveitar cada momento da sua aventura internacional.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Video+Immersion');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🎬 Video English Immersion</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Aprenda inglês com a vida real! **Video English Immersion** te mergulha no idioma através de videoclipes autênticos e situações do dia a dia. Desenvolva sua compreensão auditiva, vocabulário e fluência de forma dinâmica e envolvente, conectando-se ao inglês como ele é realmente falado. Seus filmes, séries e músicas se tornam sua sala de aula.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Unlock+English');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🔑 Unlock Your English</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Comece sua jornada no inglês com o pé direito! ou seu inglês está enferrujado? **Unlock Your English** é o curso para quem já teve contato com o idioma, mas precisa destravar a fluência. Reative seu vocabulário, solidifique a gramática e ganhe confiança para falar e entender. Transforme seu conhecimento adormecido em comunicação ativa. Aprenda o vocabulário essencial, a gramática fundamental e a construir frases simples para se comunicar com confiança desde o início. Seu futuro bilíngue começa aqui.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Seção de Cursos: 'Business English' -->
+        <section class="mt-16">
+            <h2 class="text-2xl font-semibold mb-6">💼 Business English</h2>
+            <div class="flex flex-col md:flex-row flex-wrap gap-6 items-center">
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/374151/ffffff?text=Authentic+Flow');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🎙️ Authentic English Flow</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Cansado do inglês 'de livro'? **Authentic English Flow** te conecta ao inglês real, falado por nativos. Aprenda com cenas curtas de situações cotidianas, decodificando a língua viva. Ganhe fluência natural e confiança para se comunicar de forma autêntica. Fale como um local!</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Executive+Delivery');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">📈 Executive Delivery Mastery</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Assuma o controle de seus projetos, reuniões e apresentações. Este curso master eleva suas habilidades em **gerenciamento de projetos**, **condução de reuniões produtivas** e **apresentações de alto impacto**. Transforme ideias em resultados, otimizando sua influência e eficácia profissional em qualquer contexto.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Email+Mastery');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">📧 Email Mastery</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Transforme sua comunicação digital. **Email Mastery** te ensina a escrever e-mails claros, concisos e impactantes. Aprenda a engajar, economizar tempo e obter resultados. Domine a arte do e-mail profissional e eleve sua presença. Mensagens que realmente importam.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Civil+Engineering');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🏗️ Civil Engineering Dynamics</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Projete e construa o futuro, sem barreiras. **Civil Engineering Dynamics** prepara você para a engenharia civil moderna. Domine o planejamento, design e gestão de projetos de infraestrutura, e adquira o **inglês técnico essencial** para colaborar e liderar globalmente. Sua expertise, reconhecida mundialmente.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Essential+Kit');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🛠️ Essential Kit</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Equipe-se para o sucesso. **The Professional's Essential Kit** oferece as ferramentas cruciais para otimizar sua comunicação, produtividade e impacto no ambiente de trabalho. Domine habilidades fundamentais para se destacar, liderar projetos e construir uma carreira sólida em qualquer área.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Interview+Edge');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🤝 Interview Edge</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Destaque-se em qualquer entrevista. **Interview Edge** prepara você para conquistar a vaga dos seus sonhos, dominando técnicas de comunicação, linguagem corporal e respostas estratégicas. Ganhe a confiança necessária para brilhar, superar a concorrência e garantir seu próximo desafio profissional.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Eloquent+Politeness');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🎩 The Art of Eloquent Politeness</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Aprimore sua comunicação com distinção. **The Art of Eloquent Politeness** te guia para uma expressão verbal que une elegância e respeito. Domine a escolha de palavras, o tom de voz e a linguagem corporal para interações mais harmoniosas, eficazes e memoráveis, tanto na vida pessoal quanto profissional. Fale com graça e impacto.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção de Cursos: 'Industry-Specific English' -->
+        <section class="mt-16">
+            <h2 class="text-2xl font-semibold mb-6">⚙️ Industry-Specific English</h2>
+            <div class="flex flex-col md:flex-row flex-wrap gap-6 items-center">
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/374151/ffffff?text=Legal+English');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">⚖️ Legal English Mastery</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Advogados, domine o inglês jurídico. **Strategic Legal English Communication** aprimora sua escrita e oratória para impacto máximo. Comunique-se com precisão e confiança em sua atuação global.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=C-Suite+Impact');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">👑 C-Suite Strategic Impact</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Para líderes no topo. **Executive Leadership Ascent: Strategic Impact** é o programa definitivo para C-levels que buscam transformar visão em resultados tangíveis. Aprimore sua tomada de decisões, desenvolva estratégias disruptivas e impulsione o crescimento sustentável. Lidere com propósito e conduza sua organização ao futuro, consolidando um legado de excelência.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Hospital+English');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🏥 Hospital English Confidence</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Médicos, elevem sua prática global. **Global Medical English** aprimora sua comunicação em inglês para consultas, conferências e pesquisa. Ganhe confiança em cenários clínicos e profissionais. Domine a linguagem técnica e nuances culturais para excelência sem fronteiras.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Financial+Market');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">💰 Financial Market Intelligence</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Domine o cenário financeiro global. **Financial Market Intelligence** capacita você a tomar decisões estratégicas em finanças, bancos e investimentos. Desenvolva uma visão 360º, identifique oportunidades e lidere com excelência no mercado internacional.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Accountants');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">📊 Financial Intelligence for Accountants</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Transforme sua atuação contábil em um pilar estratégico. **Financial Intelligence for Accountants** capacita você a converter dados em **insights** decisivos para o negócio. Domine análises avançadas, relatórios estratégicos e consultoria de alto valor para impulsionar a lucratividade e o crescimento. Torne-se um parceiro indispensável para qualquer organização.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Code+Communicate');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">💻 Code & Communicate</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Vá além do código. **Code & Communicate** é o curso de inglês feito para desenvolvedores que buscam fluência em discussões técnicas, reuniões de equipe e apresentações de projetos. Comunique suas soluções com clareza e confiança, expandindo suas oportunidades em qualquer empresa global.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Industrial+Performance');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🏭 Industrial Performance Accelerator</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Acelere a performance e a inovação na indústria. **Industrial Performance Accelerator** é o curso para profissionais de Qualidade, Logística e Produção que buscam otimizar processos, implementar tecnologias e garantir um fluxo contínuo de resultados. Impulsione a excelência operacional e posicione sua fábrica no futuro.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=People+Culture');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">👥 People & Culture Optimiser</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Eleve sua comunicação em RH global. Capacitando você a conduzir entrevistas, apresentar políticas e gerenciar talentos internacionais com confiança e precisão. Domine a linguagem essencial para aquisição, desenvolvimento e engajamento, garantindo que seu RH fale a língua do sucesso global.</p>
+                    </div>
+                </div>
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Market+Influence');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">🚀 Market Influence</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">Conquiste o mercado global. **English for Market Influence** te capacita a dominar a linguagem persuasiva em vendas e marketing. Crie descrições impactantes, apresentações poderosas e negocie com confiança. Amplie sua influência e feche mais negócios em inglês.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Cursos: 'French Section' -->
+        <section class="mt-16">
+            <h2 class="text-2xl font-semibold mb-6">🇫🇷 French Section</h2>
+            <div class="flex flex-col md:flex-row flex-wrap gap-6 items-center">
+                
+                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
+                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/374151/ffffff?text=TCF+TEF');"></div>
+                    <div class="card-content">
+                        <h3 class="font-bold text-lg">📝 TCF & TEF Exam</h3>
+                        <p class="text-sm text-gray-300 line-clamp-3">**TCF & TEF Exam Accelerator** oferece estratégias precisas e prática intensiva para todas as seções: compreensão oral e escrita, e expressão oral e escrita. Conquiste a pontuação necessária para seus objetivos de estudo, imigração ou carreira, dominando o francês com confiança.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Modal para detalhes do curso (oculto por padrão) -->
+        <div id="course-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+            <div class="bg-[#141414] rounded-lg max-w-lg p-8 m-4 shadow-xl relative">
+                <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+                <h3 id="modal-title" class="text-2xl font-bold text-yellow-500 mb-4"></h3>
+                <p id="modal-description" class="text-gray-300 text-base"></p>
+            </div>
+        </div>
+
+    </main>
+    
+    <footer class="text-center py-8 text-gray-500 text-sm">
+        <p>Created by Teacher Daby - copyrights reserved &copy; 2025</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const courses = [
+                { id: 'effortless-grammar', title: '📝 Effortless Grammar', description: 'Conquiste clareza e confiança na comunicação. Domine a gramática inglesa de forma fácil e eficaz, construindo frases perfeitas sem complicação. Seu inglês, elevado.' },
+                { id: 'grammar-logos', title: '🧠 Grammar Logos', description: 'Vá além das regras e mergulhe na lógica da linguagem. **Grammar Logos** é o seu caminho para a precisão linguística avançada, desvendando os padrões intrincados que governam uma comunicação verdadeiramente impactante. Este curso explora as sutilezas e estruturas complexas, capacitando você a elaborar frases sofisticadas e expressar ideias com elegância e autoridade. Domine a arte de um inglês claro, persuasivo e gramaticalmente impecável.' },
+                { id: 'lexicon-lumina', title: '✨ Lexicon Lumina', description: 'Eleve sua maestria no inglês ao nível mais sublime. **Lexicon Lumina** é o seu portal para as **expressões mais avançadas e autênticas** usadas por nativos, desvendando as nuances que transformam um bom inglês em um inglês brilhante. Aprofunde-se em idiomatismos complexos, coloquialismos sofisticados e frases que só os verdadeiros falantes dominam, garantindo que sua comunicação seja não apenas impecável, mas verdadeiramente luminosa e inesquecível.' },
+                { id: 'small-talk', title: '🗣️ Small Talk', description: 'Acabe com o silêncio constrangedor! **Engaging Small Talk** te ensina a iniciar e manter conversas cativantes em qualquer situação. Ganhe confiança para interagir em eventos sociais, networking e no dia a dia, transformando o "papo rápido" em conexões reais e significativas. Fale com leveza e autenticidade.' },
+                { id: 'flawless-english', title: '💎 Flawless English', description: 'Cansado de cometer erros em inglês? **Flawless English** é o seu guia para eliminá-los. Domine as armadilhas de gramática, vocabulário e pronúncia. Comunique-se com confiança, precisão e profissionalismo, garantindo um inglês impecável.' },
+                { id: 'travel-english', title: '✈️ Travel English Essentials', description: 'Desbrave o mundo com confiança! **Travel English Essentials** prepara você para cada etapa da viagem: do check-in à imigração, de restaurantes a emergências. Aprenda frases práticas, vocabulário essencial e dicas culturais para se comunicar sem barreiras e aproveitar cada momento da sua aventura internacional.' },
+                { id: 'video-english', title: '🎬 Video English Immersion', description: 'Aprenda inglês com a vida real! **Video English Immersion** te mergulha no idioma através de videoclipes autênticos e situações do dia a dia. Desenvolva sua compreensão auditiva, vocabulário e fluência de forma dinâmica e envolvente, conectando-se ao inglês como ele é realmente falado. Seus filmes, séries e músicas se tornam sua sala de aula.' },
+                { id: 'unlock-english', title: '🔑 Unlock Your English', description: 'Comece sua jornada no inglês com o pé direito! ou seu inglês está enferrujado? **Unlock Your English** é o curso para quem já teve contato com o idioma, mas precisa destravar a fluência. Reative seu vocabulário, solidifique a gramática e ganhe confiança para falar e entender. Transforme seu conhecimento adormecido em comunicação ativa. Aprenda o vocabulário essencial, a gramática fundamental e a construir frases simples para se comunicar com confiança desde o início. Seu futuro bilíngue começa aqui.' },
+                { id: 'authentic-english-flow', title: '🎙️ Authentic English Flow', description: "Cansado do inglês 'de livro'? **Authentic English Flow** te conecta ao inglês real, falado por nativos. Aprenda com cenas curtas de situações cotidianas, decodificando a língua viva. Ganhe fluência natural e confiança para se comunicar de forma autêntica. Fale como um local!" },
+                { id: 'executive-delivery-mastery', title: '📈 Executive Delivery Mastery', description: 'Assuma o controle de seus projetos, reuniões e apresentações. Este curso master eleva suas habilidades em **gerenciamento de projetos**, **condução de reuniões produtivas** e **apresentações de alto impacto**. Transforme ideias em resultados, otimizando sua influência e eficácia profissional em qualquer contexto.' },
+                { id: 'email-mastery', title: '📧 Email Mastery', description: 'Transforme sua comunicação digital. **Email Mastery** te ensina a escrever e-mails claros, concisos e impactantes. Aprenda a engajar, economizar tempo e obter resultados. Domine a arte do e-mail profissional e eleve sua presença. Mensagens que realmente importam.' },
+                { id: 'civil-engineering-dynamics', title: '🏗️ Civil Engineering Dynamics', description: 'Projete e construa o futuro, sem barreiras. **Civil Engineering Dynamics** prepara você para a engenharia civil moderna. Domine o planejamento, design e gestão de projetos de infraestrutura, e adquira o **inglês técnico essencial** para colaborar e liderar globalmente. Sua expertise, reconhecida mundialmente.' },
+                { id: 'essential-kit', title: '🛠️ Essential Kit', description: 'Equipe-se para o sucesso. **The Professional\'s Essential Kit** oferece as ferramentas cruciais para otimizar sua comunicação, produtividade e impacto no ambiente de trabalho. Domine habilidades fundamentais para se destacar, liderar projetos e construir uma carreira sólida em qualquer área.' },
+                { id: 'interview-edge', title: '🤝 Interview Edge', description: 'Destaque-se em qualquer entrevista. **Interview Edge** prepara você para conquistar a vaga dos seus sonhos, dominando técnicas de comunicação, linguagem corporal e respostas estratégicas. Ganhe a confiança necessária para brilhar, superar a concorrência e garantir seu próximo desafio profissional.' },
+                { id: 'eloquent-politeness', title: '🎩 The Art of Eloquent Politeness', description: 'Aprimore sua comunicação com distinção. **The Art of Eloquent Politeness** te guia para uma expressão verbal que une elegância e respeito. Domine a escolha de palavras, o tom de voz e a linguagem corporal para interações mais harmoniosas, eficazes e memoráveis, tanto na vida pessoal quanto profissional. Fale com graça e impacto.' },
+                { id: 'legal-english-mastery', title: '⚖️ Legal English Mastery', description: 'Advogados, domine o inglês jurídico. **Strategic Legal English Communication** aprimora sua escrita e oratória para impacto máximo. Comunique-se com precisão e confiança em sua atuação global.' },
+                { id: 'c-suite-strategic-impact', title: '👑 C-Suite Strategic Impact', description: 'Para líderes no topo. **Executive Leadership Ascent: Strategic Impact** é o programa definitivo para C-levels que buscam transformar visão em resultados tangíveis. Aprimore sua tomada de decisões, desenvolva estratégias disruptivas e impulsione o crescimento sustentável. Lidere com propósito e conduza sua organização ao futuro, consolidando um legado de excelência.' },
+                { id: 'hospital-english-confidence', title: '🏥 Hospital English Confidence', description: 'Médicos, elevem sua prática global. **Global Medical English** aprimora sua comunicação em inglês para consultas, conferências e pesquisa. Ganhe confiança em cenários clínicos e profissionais. Domine a linguagem técnica e nuances culturais para excelência sem fronteiras.' },
+                { id: 'financial-market-intelligence', title: '💰 Financial Market Intelligence', description: 'Domine o cenário financeiro global. **Financial Market Intelligence** capacita você a tomar decisões estratégicas em finanças, bancos e investimentos. Desenvolva uma visão 360º, identifique oportunidades e lidere com excelência no mercado internacional.' },
+                { id: 'financial-intelligence-accountants', title: '📊 Financial Intelligence for Accountants', description: 'Transforme sua atuação contábil em um pilar estratégico. **Financial Intelligence for Accountants** capacita você a converter dados em **insights** decisivos para o negócio. Domine análises avançadas, relatórios estratégicos e consultoria de alto valor para impulsionar a lucratividade e o crescimento. Torne-se um parceiro indispensável para qualquer organização.' },
+                { id: 'code-communicate', title: '💻 Code & Communicate', description: 'Vá além do código. **Code & Communicate** é o curso de inglês feito para desenvolvedores que buscam fluência em discussões técnicas, reuniões de equipe e apresentações de projetos. Comunique suas soluções com clareza e confiança, expandindo suas oportunidades em qualquer empresa global.' },
+                { id: 'industrial-performance-accelerator', title: '🏭 Industrial Performance Accelerator', description: 'Acelere a performance e a inovação na indústria. **Industrial Performance Accelerator** é o curso para profissionais de Qualidade, Logística e Produção que buscam otimizar processos, implementar tecnologias e garantir um fluxo contínuo de resultados. Impulsione a excelência operacional e posicione sua fábrica no futuro.' },
+                { id: 'people-culture-optimiser', title: '👥 People & Culture Optimiser', description: 'Eleve sua comunicação em RH global. Capacitando você a conduzir entrevistas, apresentar políticas e gerenciar talentos internacionais com confiança e precisão. Domine a linguagem essencial para aquisição, desenvolvimento e engajamento, garantindo que seu RH fale a língua do sucesso global.' },
+                { id: 'market-influence', title: '🚀 Market Influence', description: 'Conquiste o mercado global. **English for Market Influence** te capacita a dominar a linguagem persuasiva em vendas e marketing. Crie descrições impactantes, apresentações poderosas e negocie com confiança. Amplie sua influência e feche mais negócios em inglês.' },
+                { id: 'tcf-tef-exam', title: '📝 TCF & TEF Exam', description: '**TCF & TEF Exam Accelerator** oferece estratégias precisas e prática intensiva para todas as seções: compreensão oral e escrita, e expressão oral e escrita. Conquiste a pontuação necessária para seus objetivos de estudo, imigração ou carreira, dominando o francês com confiança.' }
+            ];
+
+            const courseCards = document.querySelectorAll('.course-card');
+            const modal = document.getElementById('course-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const closeModalBtn = document.getElementById('close-modal');
+
+            // Adiciona a funcionalidade de clique para abrir o modal
+            courseCards.forEach(card => {
+                // Recupera o ID do curso a partir do título do card para encontrar a descrição completa
+                const titleText = card.querySelector('h3').textContent;
+                const course = courses.find(c => c.title === titleText);
+
+                if (course) {
+                    card.addEventListener('click', () => {
+                        modalTitle.innerHTML = course.title;
+                        modalDescription.innerHTML = course.description;
+                        modal.classList.remove('hidden');
+                    });
+                }
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
