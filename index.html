@@ -1,511 +1,848 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Daby - Cursos de Inglês</title>
+    <title>Inglês Real para Profissionais</title>
+    <!-- Incluindo Tailwind CSS para facilitar o design e a responsividade -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Incluindo Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Incluindo as fontes Inter e Great Vibes do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Incluindo Chart.js para o gráfico -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Estilos gerais para um visual escuro e moderno */
+        /* Definindo a fonte padrão e o background gradiente */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d0d0d;
-            color: #ffffff;
-            line-height: 1.6;
+            /* Fundo modo escuro: preto puro */
+            background-color: #000000;
+            color: #f3f4f6; /* Cor de texto padrão branca para contraste */
+            overflow-x: hidden;
         }
 
-        /* Netflix-style background gradient */
-        .netflix-bg {
-            position: relative;
-            background: radial-gradient(circle at top, #141414, #000000);
-            min-height: 100vh;
+        /* Estilização para o gradiente de texto */
+        .gradient-text {
+            background: linear-gradient(45deg, #e0c3fc, #8ec5fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            font-weight: 800;
         }
 
-        /* Animação para o efeito de "brilho" da logo */
-        @keyframes golden-glow {
-            0%, 100% { text-shadow: 0 0 5px #ffc700, 0 0 10px #ffc700; }
-            50% { text-shadow: 0 0 20px #ffc700, 0 0 40px #ffc700, 0 0 50px #ffc700; }
+        /* Gradiente para os botões e cards */
+        .gradient-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
 
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 700;
-            letter-spacing: -0.05em;
-            cursor: pointer;
-            transition: all 0.5s ease;
-            text-shadow: 0 0 5px #ffc700;
+        /* Novo estilo de gradiente para texto */
+        .my-text {
+            background: linear-gradient(
+                to right,
+                purple,
+                green,
+                white
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
         }
 
-        .hero-title:hover {
-            color: #E50914;
-            animation: golden-glow 2s infinite;
+        /* Animação de brilho para o ícone */
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #fde68a, 0 0 10px #fde68a, 0 0 15px #fde68a;
+            }
+            50% {
+                text-shadow: 0 0 10px #fde68a, 0 0 20px #fde68a, 0 0 30px #fde68a;
+            }
+            100% {
+                text-shadow: 0 0 5px #fde68a, 0 0 10px #fde68a, 0 0 15px #fde68a;
+            }
+        }
+        
+        .glowing-icon {
+            animation: glow 1.5s ease-in-out infinite;
         }
 
-        /* Efeito de hover no estilo Netflix para os cards */
-        .course-card {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            cursor: pointer;
-            position: relative;
-            z-index: 10;
+        /* Estilo para a nova fonte com gradiente e sombra */
+        .special-text {
+            font-family: 'Great Vibes', cursive;
+            background: linear-gradient(45deg, #4B0082, #1E90FF, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            font-weight: bold;
+            line-height: 1.2;
         }
 
-        .course-card:hover {
-            transform: scale(1.15) translateY(-20px);
-            z-index: 20;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px 5px rgba(229, 9, 20, 0.4);
+        /* Novo efeito de animação para os textos */
+        @keyframes pulse-text {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+        .animate-pulse-text {
+            animation: pulse-text 2s ease-in-out infinite;
         }
 
-        .course-card .card-content {
-            display: none;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: auto;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0));
+        /* Animação de flutuação para a caixa de CTA */
+        @keyframes float-up {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animated-cta {
+            animation: float-up 1.5s ease-out forwards;
+        }
+
+        /* Animação para a borda gradiente */
+        @keyframes border-anim {
+            0% {
+                border-image-source: linear-gradient(45deg, #FF6B6B, #F8E8A6, #8BFFBD);
+            }
+            50% {
+                border-image-source: linear-gradient(45deg, #8BFFBD, #FF6B6B, #F8E8A6);
+            }
+            100% {
+                border-image-source: linear-gradient(45deg, #F8E8A6, #8BFFBD, #FF6B6B);
+            }
+        }
+        .animated-border {
+            border-width: 3px;
+            border-style: solid;
+            border-image-slice: 1;
+            animation: border-anim 4s linear infinite;
+        }
+
+        /* Nova animação de fade-in para a seção hero */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fade-in-up 1s ease-out forwards;
+        }
+        
+        /* Nova animação de pulso para o botão */
+        @keyframes button-pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .button-pulse-effect {
+            animation: button-pulse 1.5s ease-in-out infinite;
+        }
+        
+        /* Efeito de balanço mais pronunciado para ícones */
+        @keyframes swing-icon {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(15deg);
+            }
+            50% {
+                transform: rotate(-15deg);
+            }
+            75% {
+                transform: rotate(15deg);
+            }
+        }
+        .swing-icon {
+            animation: swing-icon 2s ease-in-out infinite;
+        }
+
+        /* Animação de flutuação mais dinâmica */
+        @keyframes float-icon {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-8px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            75% {
+                transform: translateY(-8px) rotate(-5deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+        .float-icon {
+            animation: float-icon 2s ease-in-out infinite;
+        }
+
+        /* Animação de pulo mais intensa para ícones e emojis */
+        @keyframes bounce-icon {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            25% {
+                transform: translateY(-10px);
+            }
+            50% {
+                transform: translateY(0);
+            }
+            75% {
+                transform: translateY(-5px);
+            }
+        }
+        .icon-bounce, .emoji-bounce {
+            display: inline-block;
+            animation: bounce-icon 1s ease-in-out infinite;
+        }
+
+        /* Animação de piscar para o ícone de lâmpada */
+        @keyframes blink-lightbulb {
+            0%, 100% {
+                color: #fde68a;
+            }
+            50% {
+                color: #fde68a80; /* Um pouco transparente para o efeito de piscar */
+            }
+        }
+        .lightbulb-blink {
+            animation: blink-lightbulb 2s ease-in-out infinite;
+        }
+
+        /* Nova animação para o relógio */
+        @keyframes tick-tock {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(-10deg);
+            }
+        }
+        .tick-tock-icon {
+            display: inline-block;
+            animation: tick-tock 1s ease-in-out infinite;
+        }
+
+        /* Estilo para o canvas do gráfico */
+        #proficiencyChart {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
             padding: 1rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease-in-out;
-            border-radius: 0 0 8px 8px;
+            max-width: 100%;
         }
 
-        .course-card:hover .card-content {
-            display: block;
-            transform: translateY(0);
+        /* Animação de pulso e mudança de cor para o título da nova seção */
+        @keyframes pulse-and-color {
+            0% {
+                transform: scale(1);
+                color: #e2e8f0;
+            }
+            50% {
+                transform: scale(1.05);
+                color: #48bb78; /* Verde */
+            }
+            100% {
+                transform: scale(1);
+                color: #e2e8f0;
+            }
+        }
+
+        .animated-heading {
+            animation: pulse-and-color 2s infinite ease-in-out;
+            text-shadow: 0 0 10px rgba(72, 187, 120, 0.7);
         }
     </style>
 </head>
-<body class="netflix-bg">
+<body class="selection:bg-indigo-300 selection:text-white">
 
-    <!-- Fundo dinâmico com imagem e gradiente - inspirado no Netflix -->
-    <div class="absolute inset-0 z-0 opacity-10" style="background-image: url('https://placehold.co/1920x1080/141414/ffffff?text=Professional+Learning'); background-size: cover; background-position: center; filter: blur(2px);"></div>
+    <!-- Seção Principal - Título e Subtítulo -->
+    <header class="container mx-auto px-6 py-12 md:py-24 text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold gradient-text animate-pulse fade-in-up" style="animation-delay: 0.2s;">
+            Inglês Real para Profissionais que Querem Resultados
+        </h1>
+        <h2 class="mt-4 text-xl md:text-2xl font-semibold text-white/90 animate-pulse-text fade-in-up" style="animation-delay: 0.4s;">
+            Sou Daby, especialista (English trainer for Brazilian professionals) em transformar o inglês dos profissionais brasileiros em comunicadores confiantes no mundo corporativo.
+        </h2>
+        <!-- Novo texto com o ícone da lâmpada de Aladim com animação de brilho, com margem superior maior para mover para baixo -->
+        <p class="mt-16 text-4xl md:text-5xl font-medium text-white/80 special-text animate-pulse-text fade-in-up" style="animation-delay: 0.6s;">
+            <i class="fas fa-wand-sparkles text-yellow-400 glowing-icon"></i> Você estava procurando um English trainer como eu. E agora você me encontrou.
+        </p>
+        <!-- Novas linhas adicionadas aqui -->
+        <p class="mt-4 text-lg md:text-xl font-medium text-white/80 animate-pulse-text fade-in-up" style="animation-delay: 0.8s;">
+            Este treinamento em inglês é para gerentes, diretores, C-Suite Level(s)
+        </p>
+        <p class="mt-2 text-lg md:text-xl font-medium text-white/80 animate-pulse-text fade-in-up" style="animation-delay: 0.9s;">
+            Aulas de treinamento especial para entrevistas de empregos
+        </p>
 
-    <!-- Container principal com conteúdo -->
-    <main class="relative z-10 px-4 py-8 md:px-12">
-        
-        <!-- Seção Hero/Destaque com a nova mensagem -->
-        <header class="flex flex-col items-center justify-center min-h-[60vh] text-center mb-16">
-            <h1 class="hero-title text-white">Teacher Daby's English Courses</h1>
-            <p class="text-xl md:text-2xl mt-4 max-w-2xl">
-                Bem-vindo ao **English Hub**, onde você pode aprimorar seu inglês para diversos fins, do uso diário à comunicação profissional altamente especializada.
-            </p>
-            <p class="text-gray-400 text-lg mt-2">
-                💡 Clique em qualquer curso para ver mais detalhes!
-            </p>
-        </header>
+        <!-- Nova Seção de Metodologia "Lego Block" -->
+        <section class="container mx-auto px-4 py-8 md:py-16">
+            <div class="gradient-card rounded-3xl p-6 md:p-12 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                <h3 class="text-3xl font-bold mb-6 text-white flex items-center justify-center gap-4">
+                    <i class="fas fa-cube text-yellow-500 text-3xl float-icon"></i> Metodologia "Lego Block Language Immersion"
+                </h3>
+                <!-- Início do novo texto sobre a metodologia ACAP -->
+                <p class="text-lg text-center font-medium text-white">
+                    Muitas pessoas acreditam que pensar em inglês é um dom ou algo que só acontece com fluência avançada. Na verdade, é um processo passo a passo que você pode dominar. A chave é reconhecer que a tradução mental é o que impede seu cérebro de processar o idioma de forma nativa. O objetivo, então, é treinar a mente para ir direto da ideia à palavra em inglês.
+                </p>
+                <p class="text-lg text-center font-medium text-white mt-2">
+                    Isso só é possível quando você constrói um **repertório de vocabulário específico para cada situação**, permitindo que o processo de pensar em inglês realmente comece.
+                </p>
+                <p class="text-lg text-center font-medium text-white mt-2">
+                    Tudo que você precisa é um bom repertório de palavras em blocos (de 3 a 5 palavras - palavras fixas para lembrar em situações reais) para parecer que você está vivendo as situações no trabalho.
+                </p>
 
-        <!-- Seção de marketing - Foco no problema e solução (Conteúdo novo e otimizado) -->
-        <section class="my-16 max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-4 text-[#E50914] leading-tight">⚡️ Profissional brasileiro, seu inglês está travando sua carreira?</h2>
-            <p class="text-xl md:text-2xl mt-4 max-w-2xl mx-auto italic text-gray-400">
-                Você se identifica?
-            </p>
-            <div class="flex flex-col items-start text-left mt-8 max-w-2xl mx-auto">
-                <ul class="space-y-4 text-lg">
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-4"></i> Estuda, mas o inglês não flui.
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-4"></i> O tempo passa e você continua inseguro(a).
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-4"></i> Perde oportunidades por medo de falar.
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-4"></i> Quer o emprego dos sonhos, mas o inglês te segura.
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-4"></i> Odeia gramática e métodos ultrapassados.
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check text-green-500 mr-4"></i> Quer falar inglês real, para o mundo real.
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Novo bloco de diferenciais -->
-        <section class="my-16 max-w-4xl mx-auto text-center">
-            <h3 class="text-2xl font-bold mb-6 text-yellow-500">💡 O que me torna diferente</h3>
-            <p class="text-xl max-w-3xl mx-auto text-gray-300">
-                Não sou mais um curso de inglês. Sou um treinamento estratégico, 100% personalizado para transformar o seu inglês em uma ferramenta de crescimento profissional imediato.
-            </p>
-            <ul class="text-lg space-y-4 max-w-2xl mx-auto text-gray-300 mt-4">
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-star text-yellow-500 mr-4"></i> Aulas adaptadas à sua área e cargo – vocabulário, expressões e situações que você realmente vive.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-star text-yellow-500 mr-4"></i> Método direto e prático – nada de inglês “de livro”, mas sim inglês usado por profissionais de alto nível.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-star text-yellow-500 mr-4"></i> Resultados rápidos – já aplicáveis no dia a dia de trabalho.
-                </li>
-            </ul>
-        </section>
-
-        <!-- Objetivos Claros -->
-        <section class="my-16 max-w-4xl mx-auto text-center">
-            <h3 class="text-2xl font-bold mb-6 text-yellow-500">🎯 Seus resultados</h3>
-            <ul class="text-lg space-y-4 max-w-2xl mx-auto text-gray-300">
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-trophy text-yellow-500 mr-4"></i> Falar com **confiança e naturalidade**.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-trophy text-yellow-500 mr-4"></i> **Dominar** vocabulário corporativo e técnico da sua área.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-trophy text-yellow-500 mr-4"></i> Ter **clareza** para escrever e-mails, relatórios e apresentações.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-trophy text-yellow-500 mr-4"></i> Se **destacar** em reuniões, negociações e entrevistas.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-trophy text-yellow-500 mr-4"></i> **Ganhar credibilidade** no ambiente profissional.
-                </li>
-            </ul>
-        </section>
-        
-        <!-- Destaques do Curso -->
-        <section class="my-16 max-w-4xl mx-auto text-center">
-            <h3 class="text-2xl font-bold mb-6 text-yellow-500">🚀 Como vamos chegar lá</h3>
-            <ul class="text-lg space-y-4 max-w-2xl mx-auto text-gray-300">
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-rocket text-yellow-500 mr-4"></i> Estudo individual 1x1, com plano personalizado.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-rocket text-yellow-500 mr-4"></i> Vocabulário específico para sua área de atuação.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-rocket text-yellow-500 mr-4"></i> Expressões e termos usados por profissionais nativos.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-rocket text-yellow-500 mr-4"></i> Simulações reais de reuniões, conference calls e negociações.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-rocket text-yellow-500 mr-4"></i> E-mails profissionais, apresentações e relatórios de alto nível.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-rocket text-yellow-500 mr-4"></i> Abordagem holística — quebrando bloqueios e acelerando sua evolução.
-                </li>
-                <li class="flex items-center justify-center">
-                    <i class="fas fa-rocket text-yellow-500 mr-4"></i> Uso de materiais reais (notícias, vídeos, documentos corporativos).
-                </li>
-            </ul>
-        </section>
-
-        <!-- Quote -->
-        <section class="my-16 max-w-4xl mx-auto text-center">
-            <p class="text-xl md:text-2xl italic text-gray-400">
-                "Eu ajudo profissionais brasileiros a falarem inglês com confiança, clareza e impacto — para crescer na carreira e conquistar oportunidades internacionais."
-            </p>
-        </section>
-        
-        <!-- Seção de Cursos: 'General English' -->
-        <section class="mt-16">
-            <h2 class="text-2xl font-semibold mb-6">🗣️ General English</h2>
-            <div class="flex flex-col md:flex-row flex-wrap gap-6 items-center">
+                <h4 class="text-2xl font-bold mt-8 mb-4 text-center text-white">Vamos ver como as quatro etapas do seu processo levam a esse resultado:</h4>
                 
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/374151/ffffff?text=Effortless+Grammar');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">📝 Effortless Grammar</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Conquiste clareza e confiança na comunicação. Domine a gramática inglesa de forma fácil e eficaz, construindo frases perfeitas sem complicação. Seu inglês, elevado.</p>
+                <div class="space-y-6 text-white">
+                    <div>
+                        <h5 class="text-xl font-bold mb-1"><span class="text-indigo-500">1. Adquirir</span></h5>
+                        <p class="text-sm">Não se trata apenas de memorizar listas de palavras. Adquirir vocabulário significa aprender novas palavras e expressões dentro de um contexto real, compreendendo seu uso e suas nuances. Essa é a base. Você está enchendo a sua "biblioteca mental" com o material necessário.</p>
+                    </div>
+                    <div>
+                        <h5 class="text-xl font-bold mb-1"><span class="text-purple-500">2. Contextualizar</span></h5>
+                        <p class="text-sm">Esta é a etapa mais importante para romper com a tradução. Em vez de traduzir a palavra para o português, seu cérebro cria uma conexão direta entre o conceito (a ideia) e a palavra em inglês. Por exemplo, ao aprender a palavra "sustainability", você a associa diretamente à imagem de um mundo mais verde, à reciclagem e a energias limpas, e não à palavra "sustentabilidade" em português.</p>
+                    </div>
+                    <div>
+                        <h5 class="text-xl font-bold mb-1"><span class="text-pink-500">3. Aplicar</span></h5>
+                        <p class="text-sm">Agora é o momento de colocar o que foi aprendido em prática. Usar o novo vocabulário em frases, seja falando ou escrevendo, reforça a conexão neural. Quando você aplica o vocabulário em uma conversa ou texto, o seu cérebro está ativamente trabalhando para ligar a ideia à palavra, sem passar pelo intermediário do português.</p>
+                    </div>
+                    <div>
+                        <h5 class="text-xl font-bold mb-1"><span class="text-red-500">4. Praticar</span></h5>
+                        <p class="text-sm">A repetição e a consistência transformam a aplicação em um hábito. Praticar com frequência o uso do vocabulário em diferentes situações permite que a associação entre o conceito e a palavra em inglês se torne automática. É nesse ponto que a tradução mental desaparece e você, de fato, começa a pensar em inglês.</p>
                     </div>
                 </div>
-
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Grammar+Logos');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🧠 Grammar Logos</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Vá além das regras e mergulhe na lógica da linguagem. **Grammar Logos** é o seu caminho para a precisão linguística avançada, desvendando os padrões intrincados que governam uma comunicação verdadeiramente impactante...</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Lexicon+Lumina');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">✨ Lexicon Lumina</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Eleve sua maestria no inglês ao nível mais sublime. **Lexicon Lumina** é o seu portal para as **expressões mais avançadas e autênticas** usadas por nativos, desvendando as nuances que transformam um bom inglês em um inglês brilhante. Aprofunde-se em idiomatismos complexos, coloquialismos sofisticados e frases que só os verdadeiros falantes dominam, garantindo que sua comunicação seja não apenas impecável, mas verdadeiramente luminosa e inesquecível.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Small+Talk');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🗣️ Small Talk</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Acabe com o silêncio constrangedor! **Engaging Small Talk** te ensina a iniciar e manter conversas cativantes em qualquer situação. Ganhe confiança para interagir em eventos sociais, networking e no dia a dia, transformando o "papo rápido" em conexões reais e significativas. Fale com leveza e autenticidade.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Flawless+English');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">💎 Flawless English</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Cansado de cometer erros em inglês? **Flawless English** é o seu guia para eliminá-los. Domine as armadilhas de gramática, vocabulário e pronúncia. Comunique-se com confiança, precisão e profissionalismo, garantindo um inglês impecável.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Travel+English');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">✈️ Travel English Essentials</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Desbrave o mundo com confiança! **Travel English Essentials** prepara você para cada etapa da viagem: do check-in à imigração, de restaurantes a emergências. Aprenda frases práticas, vocabulário essencial e dicas culturais para se comunicar sem barreiras e aproveitar cada momento da sua aventura internacional.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Video+Immersion');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🎬 Video English Immersion</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Aprenda inglês com a vida real! **Video English Immersion** te mergulha no idioma através de videoclipes autênticos e situações do dia a dia. Desenvolva sua compreensão auditiva, vocabulário e fluência de forma dinâmica e envolvente, conectando-se ao inglês como ele é realmente falado. Seus filmes, séries e músicas se tornam sua sala de aula.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Unlock+English');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🔑 Unlock Your English</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Comece sua jornada no inglês com o pé direito! ou seu inglês está enferrujado? **Unlock Your English** é o curso para quem já teve contato com o idioma, mas precisa destravar a fluência. Reative seu vocabulário, solidifique a gramática e ganhe confiança para falar e entender. Transforme seu conhecimento adormecido em comunicação ativa. Aprenda o vocabulário essencial, a gramática fundamental e a construir frases simples para se comunicar com confiança desde o início. Seu futuro bilíngue começa aqui.</p>
-                    </div>
-                </div>
-                
-            </div>
-        </section>
-
-        <!-- Seção de Cursos: 'Business English' -->
-        <section class="mt-16">
-            <h2 class="text-2xl font-semibold mb-6">💼 Business English</h2>
-            <div class="flex flex-col md:flex-row flex-wrap gap-6 items-center">
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/374151/ffffff?text=Authentic+Flow');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🎙️ Authentic English Flow</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Cansado do inglês 'de livro'? **Authentic English Flow** te conecta ao inglês real, falado por nativos. Aprenda com cenas curtas de situações cotidianas, decodificando a língua viva. Ganhe fluência natural e confiança para se comunicar de forma autêntica. Fale como um local!</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Executive+Delivery');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">📈 Executive Delivery Mastery</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Assuma o controle de seus projetos, reuniões e apresentações. Este curso master eleva suas habilidades em **gerenciamento de projetos**, **condução de reuniões produtivas** e **apresentações de alto impacto**. Transforme ideias em resultados, otimizando sua influência e eficácia profissional em qualquer contexto.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Email+Mastery');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">📧 Email Mastery</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Transforme sua comunicação digital. **Email Mastery** te ensina a escrever e-mails claros, concisos e impactantes. Aprenda a engajar, economizar tempo e obter resultados. Domine a arte do e-mail profissional e eleve sua presença. Mensagens que realmente importam.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Civil+Engineering');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🏗️ Civil Engineering Dynamics</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Projete e construa o futuro, sem barreiras. **Civil Engineering Dynamics** prepara você para a engenharia civil moderna. Domine o planejamento, design e gestão de projetos de infraestrutura, e adquira o **inglês técnico essencial** para colaborar e liderar globalmente. Sua expertise, reconhecida mundialmente.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Essential+Kit');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🛠️ Essential Kit</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Equipe-se para o sucesso. **The Professional's Essential Kit** oferece as ferramentas cruciais para otimizar sua comunicação, produtividade e impacto no ambiente de trabalho. Domine habilidades fundamentais para se destacar, liderar projetos e construir uma carreira sólida em qualquer área.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Interview+Edge');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🤝 Interview Edge</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Destaque-se em qualquer entrevista. **Interview Edge** prepara você para conquistar a vaga dos seus sonhos, dominando técnicas de comunicação, linguagem corporal e respostas estratégicas. Ganhe a confiança necessária para brilhar, superar a concorrência e garantir seu próximo desafio profissional.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Eloquent+Politeness');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🎩 The Art of Eloquent Politeness</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Aprimore sua comunicação com distinção. **The Art of Eloquent Politeness** te guia para uma expressão verbal que une elegância e respeito. Domine a escolha de palavras, o tom de voz e a linguagem corporal para interações mais harmoniosas, eficazes e memoráveis, tanto na vida pessoal quanto profissional. Fale com graça e impacto.</p>
-                    </div>
+                <!-- Fim do novo texto sobre a metodologia ACAP -->
+                <!-- Animação de blocos para a metodologia ACAP, agora com a nova frase -->
+                <div class="flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-4 mt-8">
+                    <div class="bg-indigo-500/80 text-white font-bold px-6 py-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-200">Adquirir</div>
+                    <div class="text-2xl text-white font-bold hidden md:block">➡️</div>
+                    <div class="bg-purple-500/80 text-white font-bold px-6 py-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-200">Contextualizar</div>
+                    <div class="text-2xl text-white font-bold hidden md:block">➡️</div>
+                    <div class="bg-pink-500/80 text-white font-bold px-6 py-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-200">Aplicar</div>
+                    <div class="text-2xl text-white font-bold hidden md:block">➡️</div>
+                    <div class="bg-red-500/80 text-white font-bold px-6 py-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-200">Praticar</div>
                 </div>
             </div>
         </section>
-        
-        <!-- Seção de Cursos: 'Industry-Specific English' -->
-        <section class="mt-16">
-            <h2 class="text-2xl font-semibold mb-6">⚙️ Industry-Specific English</h2>
-            <div class="flex flex-col md:flex-row flex-wrap gap-6 items-center">
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/374151/ffffff?text=Legal+English');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">⚖️ Legal English Mastery</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Advogados, domine o inglês jurídico. **Strategic Legal English Communication** aprimora sua escrita e oratória para impacto máximo. Comunique-se com precisão e confiança em sua atuação global.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=C-Suite+Impact');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">👑 C-Suite Strategic Impact</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Para líderes no topo. **Executive Leadership Ascent: Strategic Impact** é o programa definitivo para C-levels que buscam transformar visão em resultados tangíveis. Aprimore sua tomada de decisões, desenvolva estratégias disruptivas e impulsione o crescimento sustentável. Lidere com propósito e conduza sua organização ao futuro, consolidando um legado de excelência.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Hospital+English');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🏥 Hospital English Confidence</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Médicos, elevem sua prática global. **Global Medical English** aprimora sua comunicação em inglês para consultas, conferências e pesquisa. Ganhe confiança em cenários clínicos e profissionais. Domine a linguagem técnica e nuances culturais para excelência sem fronteiras.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Financial+Market');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">💰 Financial Market Intelligence</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Domine o cenário financeiro global. **Financial Market Intelligence** capacita você a tomar decisões estratégicas em finanças, bancos e investimentos. Desenvolva uma visão 360º, identifique oportunidades e lidere com excelência no mercado internacional.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Accountants');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">📊 Financial Intelligence for Accountants</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Transforme sua atuação contábil em um pilar estratégico. **Financial Intelligence for Accountants** capacita você a converter dados em **insights** decisivos para o negócio. Domine análises avançadas, relatórios estratégicos e consultoria de alto valor para impulsionar a lucratividade e o crescimento. Torne-se um parceiro indispensável para qualquer organização.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Code+Communicate');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">💻 Code & Communicate</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Vá além do código. **Code & Communicate** é o curso de inglês feito para desenvolvedores que buscam fluência em discussões técnicas, reuniões de equipe e apresentações de projetos. Comunique suas soluções com clareza e confiança, expandindo suas oportunidades em qualquer empresa global.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Industrial+Performance');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🏭 Industrial Performance Accelerator</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Acelere a performance e a inovação na indústria. **Industrial Performance Accelerator** é o curso para profissionais de Qualidade, Logística e Produção que buscam otimizar processos, implementar tecnologias e garantir um fluxo contínuo de resultados. Impulsione a excelência operacional e posicione sua fábrica no futuro.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=People+Culture');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">👥 People & Culture Optimiser</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Eleve sua comunicação em RH global. Capacitando você a conduzir entrevistas, apresentar políticas e gerenciar talentos internacionais com confiança e precisão. Domine a linguagem essencial para aquisição, desenvolvimento e engajamento, garantindo que seu RH fale a língua do sucesso global.</p>
-                    </div>
-                </div>
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/1F2937/ffffff?text=Market+Influence');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">🚀 Market Influence</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">Conquiste o mercado global. **English for Market Influence** te capacita a dominar a linguagem persuasiva em vendas e marketing. Crie descrições impactantes, apresentações poderosas e negocie com confiança. Amplie sua influência e feche mais negócios em inglês.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    </header>
 
-        <!-- Seção de Cursos: 'French Section' -->
-        <section class="mt-16">
-            <h2 class="text-2xl font-semibold mb-6">🇫🇷 French Section</h2>
-            <div class="flex flex-col md:flex-row flex-wrap gap-6 items-center">
-                
-                <div class="course-card w-full md:w-[300px] h-48 bg-gray-800 rounded-lg overflow-hidden relative">
-                    <div class="h-full w-full bg-cover bg-center rounded-lg" style="background-image: url('https://placehold.co/400x300/374151/ffffff?text=TCF+TEF');"></div>
-                    <div class="card-content">
-                        <h3 class="font-bold text-lg">📝 TCF & TEF Exam</h3>
-                        <p class="text-sm text-gray-300 line-clamp-3">**TCF & TEF Exam Accelerator** oferece estratégias precisas e prática intensiva para todas as seções: compreensão oral e escrita, e expressão oral e escrita. Conquiste a pontuação necessária para seus objetivos de estudo, imigração ou carreira, dominando o francês com confiança.</p>
+    <!-- Nova Seção de Destaque - Progresso Tangível -->
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <div class="gradient-card rounded-3xl p-6 md:p-12 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+            <h3 class="text-3xl font-bold mb-6 text-white flex items-center justify-center gap-4">
+                <i class="fas fa-chart-bar text-yellow-500 text-3xl float-icon"></i> Progresso Tangível. Sim, ele existe.
+            </h3>
+            <p class="text-lg text-center font-medium text-white">
+                Muitas aulas de conversação se perdem no "bate-papo". Você fala, mas não evolui. No meu treinamento, cada conversa tem um objetivo. Focamos em resultados concretos, medindo sua evolução em vocabulário, clareza e confiança. O progresso não é só sentido, ele é **visível**.
+            </p>
+            <p class="text-lg text-center font-bold italic uppercase mt-4 text-white">
+                PARE DE ANDAR EM CÍRCULOS
+            </p>
+        </div>
+    </section>
+
+    <!-- Nova Seção de Destaque - Business English -->
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <div class="gradient-card rounded-3xl p-6 md:p-12 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+            <h3 class="text-3xl font-bold mb-6 text-white flex items-center justify-center gap-4">
+                <i class="fas fa-bullseye text-yellow-500 text-3xl float-icon"></i> Inglês de Negócios para Foco
+            </h3>
+            <p class="text-lg text-center font-medium text-white">
+                O **Business English for specific purposes** nunca depende de um nível de inglês. Ao contrário do que muitos pensam, você encontra o que precisa para alavancar seu inglês através de um **vocabulário específico e situações reais do seu trabalho**, independente do seu nível atual de proficiência.
+            </p>
+            <p class="text-lg text-center font-bold italic uppercase mt-4 text-white">
+                PODE CONTAR COMIGO
+            </p>
+        </div>
+    </section>
+
+    <!-- Nova Seção: Não é uma aula, é um treinamento -->
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <div class="gradient-card rounded-3xl p-6 md:p-12 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+            <h3 class="text-3xl font-bold mb-6 text-white flex items-center gap-4">
+                <i class="fas fa-briefcase text-yellow-500 text-3xl float-icon"></i> This Isn't an English Class. It's a Professional Training.
+            </h3>
+            <p class="text-lg text-center font-medium text-white">
+                We're moving beyond the traditional classroom. This program isn't about general conversation; it's a strategic training designed to equip you with the specific communication skills you need to navigate your professional life with confidence and precision.
+            </p>
+            <p class="text-lg text-center font-bold italic uppercase mt-4 text-white">
+                Stop Learning English. Start Training for Your Career.
+            </p>
+        </div>
+    </section>
+
+    <!-- Seção de Problemas - Onde o usuário se identifica -->
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <div class="gradient-card rounded-3xl p-6 md:p-12 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+            <h3 class="text-3xl font-bold mb-6 text-white flex items-center justify-center gap-4">
+                <i class="fas fa-bolt text-yellow-500 text-3xl swing-icon"></i> O Seu Problema, Resolvido. <i class="fas fa-bolt text-yellow-500 text-3xl swing-icon"></i>
+            </h3>
+            <p class="text-lg text-center font-medium text-white">
+                <span class="font-bold text-xl block mb-2">Profissional brasileiro, seu inglês está travando sua carreira?</span>
+            </p>
+            <div class="mt-8 grid md:grid-cols-2 gap-6">
+                <!-- Ponto 1: Estagnação -->
+                <div class="bg-gray-800/50 rounded-lg p-4 shadow-md transition-transform hover:scale-105 duration-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-clock text-yellow-500 text-2xl icon-bounce"></i>
+                        <p class="font-bold text-white text-lg">Sua evolução está estagnada?</p>
                     </div>
+                    <p class="text-sm text-gray-300">Você já investiu anos de estudo, mas a fluência parece cada vez mais distante. O tempo passa e a insegurança só aumenta.</p>
+                </div>
+                <!-- Ponto 2: Carreira travada -->
+                <div class="bg-gray-800/50 rounded-lg p-4 shadow-md transition-transform hover:scale-105 duration-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-rocket text-yellow-500 text-2xl icon-bounce"></i>
+                        <p class="font-bold text-white text-lg">Sua carreira está travada?</p>
+                    </div>
+                    <p class="text-sm text-gray-300">Vagas de emprego e promoções ficam inacessíveis porque o medo de falar inglês te paralisa.</p>
+                </div>
+                <!-- Ponto 3: Estresse -->
+                <div class="bg-gray-800/50 rounded-lg p-4 shadow-md transition-transform hover:scale-105 duration-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-grimace text-yellow-500 text-2xl icon-bounce"></i>
+                        <p class="font-bold text-white text-lg">A conversa em inglês virou estresse?</p>
+                    </div>
+                    <p class="text-sm text-gray-300">Você se sente travado e ansioso nas reuniões, e a comunicação em inglês no trabalho se tornou uma fonte de estresse.</p>
+                </div>
+                <!-- Ponto 4: Métodos antigos -->
+                <div class="bg-gray-800/50 rounded-lg p-4 shadow-md transition-transform hover:scale-105 duration-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-ban text-yellow-500 text-2xl icon-bounce"></i>
+                        <p class="font-bold text-white text-lg">Cansado de métodos antigos?</p>
+                    </div>
+                    <p class="text-sm text-gray-300">Chega de aulas de gramática que não te preparam para o mundo real. Você precisa de um método que funcione, não de mais teoria.</p>
+                </div>
+                <!-- Ponto 5: Comunicação em Reuniões -->
+                <div class="bg-gray-800/50 rounded-lg p-4 shadow-md transition-transform hover:scale-105 duration-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-microphone-alt text-yellow-500 text-2xl icon-bounce"></i>
+                        <p class="font-bold text-white text-lg">Perde oportunidades em reuniões?</p>
+                    </div>
+                    <p class="text-sm text-gray-300">Você entende o que é dito, mas não consegue expressar suas ideias de forma clara e assertiva. Acaba sendo "invisível" nas reuniões com a equipe internacional.</p>
+                </div>
+                <!-- Ponto 6: Medo do Sotaque -->
+                <div class="bg-gray-800/50 rounded-lg p-4 shadow-md transition-transform hover:scale-105 duration-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-headset text-yellow-500 text-2xl icon-bounce"></i>
+                        <p class="font-bold text-white text-lg">Tem medo do seu sotaque?</p>
+                    </div>
+                    <p class="text-sm text-gray-300">Você evita falar inglês porque se sente inseguro com seu sotaque. Acha que não será compreendido ou que será julgado, o que te impede de praticar e evoluir.</p>
+                </div>
+                <!-- Ponto 7: Falta de Confiança -->
+                <div class="bg-gray-800/50 rounded-lg p-4 shadow-md transition-transform hover:scale-105 duration-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-handshake text-yellow-500 text-2xl icon-bounce"></i>
+                        <p class="font-bold text-white text-lg">Sua falta de confiança te paralisa?</p>
+                    </div>
+                    <p class="text-sm text-gray-300">Mesmo com um bom vocabulário, a insegurança é tanta que você simplesmente trava. A mente fica em branco na hora H, e você perde a chance de mostrar seu valor.</p>
+                </div>
+                 <!-- Ponto 8 (NOVO): Aulas Tradicionais -->
+                <div class="bg-gray-800/50 rounded-lg p-4 shadow-md transition-transform hover:scale-105 duration-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-chalkboard-teacher text-yellow-500 text-2xl icon-bounce"></i>
+                        <p class="font-bold text-white text-lg">Desanimado com aulas 'tradicionais'?</p>
+                    </div>
+                    <p class="text-sm text-gray-300">Você já passou por aulas chatas, sem conexão com o seu trabalho, onde o foco era apenas memorizar regras de gramática que você nunca usa no mundo real. Isso faz o seu cérebro associar inglês a algo maçante e inútil para a sua rotina.</p>
+                </div>
+                <!-- Ponto 9 (NOVO): Conteúdo Genérico -->
+                <div class="bg-gray-800/50 rounded-lg p-4 shadow-md transition-transform hover:scale-105 duration-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-list-ul text-yellow-500 text-2xl icon-bounce"></i>
+                        <p class="font-bold text-white text-lg">Você se perde em conteúdo genérico?</p>
+                    </div>
+                    <p class="text-sm text-gray-300">Você recorre a filmes, séries, podcasts e músicas, mas sente que está apenas consumindo, e não aprendendo. Sem um método e um objetivo claros, todo esse conteúdo se torna uma bagunça que não te prepara para os desafios específicos do mundo corporativo.</p>
                 </div>
             </div>
-        </section>
-        
-        <!-- Modal para detalhes do curso (oculto por padrão) -->
-        <div id="course-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
-            <div class="bg-[#141414] rounded-lg max-w-lg p-8 m-4 shadow-xl relative">
-                <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
-                <h3 id="modal-title" class="text-2xl font-bold text-yellow-500 mb-4"></h3>
-                <p id="modal-description" class="text-gray-300 text-base"></p>
+            <p class="text-center font-bold text-xl text-white mt-8">Você se identifica?</p>
+        </div>
+    </section>
+
+    <!-- Nova Seção de Vocabulário -->
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <div class="gradient-card rounded-3xl p-6 md:p-12 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+            <h3 class="text-3xl font-bold mb-6 text-white flex items-center justify-center gap-4">
+                <i class="fas fa-brain text-yellow-500 text-3xl float-icon"></i> O Vocabulário que Transforma sua Comunicação
+            </h3>
+            <div class="text-center">
+                <p class="text-lg font-medium text-white">
+                    Você traduz e não fala um inglês natural porque ainda não estudou os vocabulários adequados para situações do trabalho. Isso cria um efeito psicológico que faz você ter medo e travar.
+                </p>
+                <p class="text-lg text-center font-bold italic uppercase mt-4 text-white">
+                    Nós vamos padronizar seu inglês.
+                </p>
+                <!-- Novo texto adicionado aqui -->
+                <p class="text-lg text-center font-medium text-white mt-2">
+                    Isso ajuda você a criar um repertório de vocabulário essencial e um vocabulário específico para alavancar sua carreira.
+                </p>
+            </div>
+            <div class="mt-8 grid md:grid-cols-2 gap-6">
+                <!-- Vocabulário Essencial e Crucial -->
+                <div class="bg-gray-800/50 rounded-lg p-6 shadow-md transition-transform hover:scale-105 duration-200">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fas fa-check-circle text-green-600 text-2xl icon-bounce"></i>
+                        <p class="font-bold text-white text-xl">Vocabulário Essencial e Crucial</p>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        O vocabulário básico que é a base da comunicação em qualquer ambiente de trabalho, preparando-o para interações diárias.
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm pl-4">
+                        <li>Termos para reuniões e apresentações.</li>
+                        <li>Expressões para e-mails profissionais.</li>
+                        <li>Frases comuns para networking.</li>
+                        <li>Verbos e substantivos essenciais do seu setor.</li>
+                    </ul>
+                </div>
+                <!-- Vocabulário para Alavancar -->
+                <div class="bg-gray-800/50 rounded-lg p-6 shadow-md transition-transform hover:scale-105 duration-200">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fas fa-arrow-up text-blue-600 text-2xl icon-bounce"></i>
+                        <p class="font-bold text-white text-xl">Vocabulário para Alavancar seu Inglês</p>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Vocabulário avançado e especializado que te diferencia, mostrando credibilidade e expertise em sua área.
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm pl-4">
+                        <li>Termos técnicos e específicos para negociações.</li>
+                        <li>Expressões para conduzir discussões complexas.</li>
+                        <li>Frases de impacto para liderança.</li>
+                        <li>Vocabulário para estratégias de negócios.</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="mt-8 text-center text-white font-bold text-lg">Com o meu método, você elimina a tradução e ganha fluência natural. Algo que eu venho aperfeiçoar em anos.... após testar várias vezes o que funciona</p>
+        </div>
+    </section>
+
+    <!-- Nova Seção de Estatísticas e Reflexão -->
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <div class="gradient-card rounded-3xl p-6 md:p-12 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+            <h3 class="text-3xl font-bold mb-6 text-white flex items-center justify-center gap-4">
+                <i class="fas fa-chart-line text-yellow-500 text-3xl swing-icon"></i> A Realidade em Números
+            </h3>
+            <p class="text-lg text-center font-medium text-white mb-6">
+                Apenas **5% da população brasileira** tem algum conhecimento de inglês. Menos de **1% é fluente**.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-white">
+                <div class="flex flex-col items-center text-center p-4">
+                    <span class="text-5xl font-extrabold my-text">5%</span>
+                    <p class="text-sm mt-2">Corresponde a cerca de 10 milhões de pessoas que entendem o idioma.</p>
+                </div>
+                <div class="flex flex-col items-center text-center p-4">
+                    <span class="text-5xl font-extrabold my-text"><1%</span>
+                    <p class="text-sm mt-2">Menos de 1 milhão de brasileiros se consideram fluentes.</p>
+                </div>
+            </div>
+
+            <div class="mt-10 p-6 bg-gray-800/50 rounded-2xl border-l-4 border-yellow-500 shadow-md">
+                <h4 class="text-xl font-bold text-white mb-4">
+                    <i class="fas fa-lightbulb text-yellow-600 mr-2"></i> Uma Reflexão Necessária:
+                </h4>
+                <p class="text-lg text-gray-300">
+                    Quantos anos você já dedicou a cursos de inglês, gastando tempo e dinheiro, para se encontrar em uma **progressão horizontal**? As aulas tradicionais falham em converter teoria em resultados práticos no seu dia a dia profissional.
+                </p>
+                <p class="text-sm text-gray-300 mt-4">
+                    A grande maioria que estuda a língua ainda enfrenta a mesma barreira: a incapacidade de se comunicar de forma efetiva. Essa é a diferença entre **ter conhecimento** e **ser fluente**. O problema não é você, mas o método.
+                </p>
             </div>
         </div>
+    </section>
 
-    </main>
+    <!-- Seção do Diferencial e Metodologia -->
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Meu Diferencial -->
+            <div class="gradient-card rounded-3xl p-6 md:p-10 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                <h3 class="text-3xl font-bold mb-6 text-white flex items-center gap-4">
+                    <i class="fas fa-lightbulb text-yellow-500 text-3xl lightbulb-blink"></i> O Meu Diferencial
+                </h3>
+                <p class="text-lg mb-4 text-white">
+                    Não sou mais um curso de inglês. Sou um **treinamento estratégico**, 100% personalizado para transformar o seu inglês em uma ferramenta de crescimento profissional imediato. Minha metodologia é uma ponte realística entre seu trabalho e o inglês que você **realmente precisa**.
+                </p>
+                <!-- Canvas para o gráfico de evolução -->
+                <div class="mt-8">
+                    <canvas id="proficiencyChart"></canvas>
+                </div>
+            </div>
+            <!-- Metodologia -->
+            <div class="gradient-card rounded-3xl p-6 md:p-10 transition-all duration-300 hover:scale-[1.01] hover:hover:shadow-2xl">
+                <h3 class="text-3xl font-bold mb-6 text-white flex items-center gap-4">
+                    <i class="fas fa-cogs text-yellow-500 text-3xl animate-spin"></i> Metodologia exclusiva (TTLE)
+                </h3>
+                <p class="text-lg mb-6 text-white">
+                    Nosso método foca em **blocos de palavras fixas** em situações reais que você enfrenta no trabalho. 🤝 Não é uma aula de inglês, é um **treinamento de comunicação profissional altamente especializada**.
+                </p>
+                <!-- Animação de blocos para a metodologia ACAP, agora dentro da caixa -->
+                <div class="flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-4 mt-8">
+                    <div class="bg-indigo-500/80 text-white font-bold px-6 py-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-200">Adquirir</div>
+                    <div class="text-2xl text-white font-bold hidden md:block">➡️</div>
+                    <div class="bg-purple-500/80 text-white font-bold px-6 py-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-200">Contextualizar</div>
+                    <div class="text-2xl text-white font-bold hidden md:block">➡️</div>
+                    <div class="bg-pink-500/80 text-white font-bold px-6 py-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-200">Aplicar</div>
+                    <div class="text-2xl text-white font-bold hidden md:block">➡️</div>
+                    <div class="bg-red-500/80 text-white font-bold px-6 py-4 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-200">Praticar</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Benefícios Reais e Resultados -->
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Benefícios Reais -->
+            <div class="gradient-card rounded-3xl p-6 md:p-10 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                <h3 class="text-3xl font-bold mb-6 text-white flex items-center gap-4">
+                    <i class="fas fa-trophy text-yellow-500 text-3xl swing-icon"></i> Benefícios Reais
+                </h3>
+                <ul class="space-y-4 text-white text-lg">
+                    <li><span class="font-bold">Comunicação clara e fluente</span> no ambiente profissional.</li>
+                    <li><span class="font-bold">Avanço na carreira</span> com maior credibilidade.</li>
+                    <li><span class="font-bold">Apresentar ideias</span> de forma persuasiva.</li>
+                    <li><span class="font-bold">Escrever e-mails</span> com profissionalismo.</li>
+                    <li><span class="font-bold">Usar vocabulário corporativo</span> de forma natural.</li>
+                </ul>
+            </div>
+            <!-- O Futuro da Comunicação -->
+            <div class="gradient-card rounded-3xl p-6 md:p-10 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                <h3 class="text-3xl font-bold mb-6 text-white flex items-center gap-4">
+                    <i class="fas fa-robot text-yellow-500 text-3xl float-icon"></i> O Futuro da Comunicação
+                </h3>
+                <p class="text-lg text-white">
+                    Ter inglês será a sua maior vantagem competitiva. No futuro, quem domina a língua inglesa não só se comunicará com as máquinas, mas também irá superá-las e fazer a diferença ao se conectar com humanos. A **inteligência artificial**, como o ChatGPT, exige comandos perfeitos em inglês para entregar os melhores resultados, mas é você quem cria a conexão humana. Aprenda inglês e construa seu futuro, abrindo portas reais e superando a tecnologia.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cursos Oferecidos -->
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <h3 class="text-3xl font-bold mb-6 text-center text-white/90">
+            <i class="fas fa-book-open text-yellow-400 float-icon"></i> Cursos Oferecidos
+        </h3>
+        <div class="grid md:grid-cols-3 gap-8 mt-8">
+            <!-- Card de General English -->
+            <div class="gradient-card rounded-3xl p-6 text-center transition-transform transform hover:scale-105 duration-200">
+                <div class="text-4xl mb-4 emoji-bounce">🗣️</div>
+                <h4 class="text-xl font-bold text-white mb-2">General English</h4>
+                <p class="text-sm text-gray-300">Aprimore seu inglês para o uso diário e social, com foco em conversação e fluência.</p>
+            </div>
+            <!-- Card de Business English -->
+            <div class="gradient-card rounded-3xl p-6 text-center transition-transform transform hover:scale-105 duration-200">
+                <div class="text-4xl mb-4 emoji-bounce">💼</div>
+                <h4 class="text-xl font-bold text-white mb-2">Business English</h4>
+                <p class="text-sm text-gray-300">Focado em reuniões, negociações, apresentações e comunicação profissional em geral.</p>
+            </div>
+            <!-- Card de Industry-Specific English -->
+            <div class="gradient-card rounded-3xl p-6 text-center transition-transform transform hover:scale-105 duration-200">
+                <div class="text-4xl mb-4 emoji-bounce">⚙️</div>
+                <h4 class="text-xl font-bold text-white mb-2">Industry-Specific English</h4>
+                <p class="text-sm text-gray-300">Vocabulário e expressões específicas para sua área de atuação (TI, marketing, finanças, etc.).</p>
+            </div>
+        </div>
+    </section>
     
-    <footer class="text-center py-8 text-gray-500 text-sm">
-        <p>Created by Teacher Daby - copyrights reserved &copy; 2025</p>
-    </footer>
+    <!-- Nova Seção: Treinamento para Entrevistas -->
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <div class="gradient-card rounded-3xl p-6 md:p-12 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+            <!-- Título animado e em letras maiúsculas -->
+            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase mb-6 text-center animated-heading">
+                TREINAMENTO ESPECIAL PARA ENTREVISTAS
+            </h1>
+            <!-- Descrição da página -->
+            <p class="text-sm md:text-lg text-gray-300 mb-8 max-w-2xl mx-auto text-center">
+                Prepare-se para o sucesso com nossas aulas de treinamento especial. Conquiste a confiança necessária para se destacar em qualquer processo seletivo.
+            </p>
+            <!-- Seção de tópicos de treinamento -->
+            <div class="space-y-6 text-left">
+                <!-- Tópico 1 -->
+                <div class="bg-gray-800/50 p-4 rounded-xl shadow-md transition-transform transform hover:scale-105 duration-300 ease-in-out cursor-pointer">
+                    <h3 class="text-lg md:text-xl font-semibold text-white mb-1">Domínio das Perguntas Comuns</h3>
+                    <p class="text-gray-300 text-sm">Aprenda a responder com clareza e confiança às perguntas mais frequentes.</p>
+                </div>
+                <!-- Tópico 2 -->
+                <div class="bg-gray-800/50 p-4 rounded-xl shadow-md transition-transform transform hover:scale-105 duration-300 ease-in-out cursor-pointer">
+                    <h3 class="text-lg md:text-xl font-semibold text-white mb-1">Técnicas de Comunicação</h3>
+                    <p class="text-gray-300 text-sm">Desenvolva sua linguagem corporal, tom de voz e habilidades de escuta.</p>
+                </div>
+                <!-- Tópico 3 -->
+                <div class="bg-gray-800/50 p-4 rounded-xl shadow-md transition-transform transform hover:scale-105 duration-300 ease-in-out cursor-pointer">
+                    <h3 class="text-lg md:text-xl font-semibold text-white mb-1">Estratégias para Negociação Salarial</h3>
+                    <p class="text-gray-300 text-sm">Saiba como negociar sua remuneração de forma estratégica e eficaz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nova Seção com Caixas Animadas e Bordas Gradientes -->
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <h3 class="text-3xl font-bold mb-6 text-center text-white/90">
+            <i class="fas fa-magic text-yellow-400 swing-icon"></i> Transforme sua comunicação
+        </h3>
+        <div class="grid md:grid-cols-3 gap-8 mt-8">
+            <div class="gradient-card rounded-3xl p-6 text-center animated-border hover:scale-105 transition-transform duration-200">
+                <h4 class="text-xl font-bold text-white mb-2">Aulas 1:1 e Exclusivas</h4>
+                <p class="text-sm text-gray-300">Aprenda no seu ritmo com atenção total e foco em suas necessidades.</p>
+            </div>
+            <div class="gradient-card rounded-3xl p-6 text-center animated-border hover:scale-105 transition-transform duration-200">
+                <h4 class="text-xl font-bold text-white mb-2">Personalização Total</h4>
+                <p class="text-sm text-gray-300">O conteúdo é 100% adaptado ao seu setor e rotina de trabalho.</p>
+            </div>
+            <div class="gradient-card rounded-3xl p-6 text-center animated-border hover:scale-105 transition-transform duration-200">
+                <h4 class="text-xl font-bold text-white mb-2">Resultados Comprovados</h4>
+                <p class="text-sm text-gray-300">Milhares de alunos já se tornaram comunicadores confiantes e fluentes, pois você aprende o que realmente importa e amplia seu vocabulário dentro dos contextos de trabalho.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Seção de CTA (Call to Action) Animada -->
+    <section class="container mx-auto px-4 py-8 md:py-16 text-center">
+        <div class="gradient-card rounded-3xl p-6 md:p-10 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl animated-cta">
+            <h3 class="text-2xl md:text-3xl font-bold text-white">
+                Pronto para transformar sua carreira?
+            </h3>
+            <p class="text-md md:text-lg text-white mt-2">
+                Agende uma conversa e descubra como você pode falar inglês com confiança.
+            </p>
+            <a href="https://api.whatsapp.com/send?phone=5511986108003" target="_blank" class="mt-6 inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 duration-200 button-pulse-effect">
+                Agendar Agora
+            </a>
+        </div>
+    </section>
+
+    <!-- Seção de CTA e Footer original, agora como rodapé -->
+    <section class="container mx-auto px-4 py-8 md:py-16 text-center">
+        <div class="gradient-card rounded-3xl p-6 md:p-10 transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+            <p class="text-2xl md:text-3xl font-bold my-text">
+                "Eu ajudo profissionais brasileiros a falarem inglês com confiança, clareza e impacto — para crescer na carreira e conquistar oportunidades internacionais."
+            </p>
+            <p class="mt-4 text-sm md:text-lg text-white">
+                - Teacher Daby
+            </p>
+        </div>
+        <p class="mt-8 text-center text-white/70 text-sm">
+            Created by Teacher Daby - copyrights reserved © 2025
+        </p>
+    </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const courses = [
-                { id: 'effortless-grammar', title: '📝 Effortless Grammar', description: 'Conquiste clareza e confiança na comunicação. Domine a gramática inglesa de forma fácil e eficaz, construindo frases perfeitas sem complicação. Seu inglês, elevado.' },
-                { id: 'grammar-logos', title: '🧠 Grammar Logos', description: 'Vá além das regras e mergulhe na lógica da linguagem. **Grammar Logos** é o seu caminho para a precisão linguística avançada, desvendando os padrões intrincados que governam uma comunicação verdadeiramente impactante. Este curso explora as sutilezas e estruturas complexas, capacitando você a elaborar frases sofisticadas e expressar ideias com elegância e autoridade. Domine a arte de um inglês claro, persuasivo e gramaticalmente impecável.' },
-                { id: 'lexicon-lumina', title: '✨ Lexicon Lumina', description: 'Eleve sua maestria no inglês ao nível mais sublime. **Lexicon Lumina** é o seu portal para as **expressões mais avançadas e autênticas** usadas por nativos, desvendando as nuances que transformam um bom inglês em um inglês brilhante. Aprofunde-se em idiomatismos complexos, coloquialismos sofisticados e frases que só os verdadeiros falantes dominam, garantindo que sua comunicação seja não apenas impecável, mas verdadeiramente luminosa e inesquecível.' },
-                { id: 'small-talk', title: '🗣️ Small Talk', description: 'Acabe com o silêncio constrangedor! **Engaging Small Talk** te ensina a iniciar e manter conversas cativantes em qualquer situação. Ganhe confiança para interagir em eventos sociais, networking e no dia a dia, transformando o "papo rápido" em conexões reais e significativas. Fale com leveza e autenticidade.' },
-                { id: 'flawless-english', title: '💎 Flawless English', description: 'Cansado de cometer erros em inglês? **Flawless English** é o seu guia para eliminá-los. Domine as armadilhas de gramática, vocabulário e pronúncia. Comunique-se com confiança, precisão e profissionalismo, garantindo um inglês impecável.' },
-                { id: 'travel-english', title: '✈️ Travel English Essentials', description: 'Desbrave o mundo com confiança! **Travel English Essentials** prepara você para cada etapa da viagem: do check-in à imigração, de restaurantes a emergências. Aprenda frases práticas, vocabulário essencial e dicas culturais para se comunicar sem barreiras e aproveitar cada momento da sua aventura internacional.' },
-                { id: 'video-english', title: '🎬 Video English Immersion', description: 'Aprenda inglês com a vida real! **Video English Immersion** te mergulha no idioma através de videoclipes autênticos e situações do dia a dia. Desenvolva sua compreensão auditiva, vocabulário e fluência de forma dinâmica e envolvente, conectando-se ao inglês como ele é realmente falado. Seus filmes, séries e músicas se tornam sua sala de aula.' },
-                { id: 'unlock-english', title: '🔑 Unlock Your English', description: 'Comece sua jornada no inglês com o pé direito! ou seu inglês está enferrujado? **Unlock Your English** é o curso para quem já teve contato com o idioma, mas precisa destravar a fluência. Reative seu vocabulário, solidifique a gramática e ganhe confiança para falar e entender. Transforme seu conhecimento adormecido em comunicação ativa. Aprenda o vocabulário essencial, a gramática fundamental e a construir frases simples para se comunicar com confiança desde o início. Seu futuro bilíngue começa aqui.' },
-                { id: 'authentic-english-flow', title: '🎙️ Authentic English Flow', description: "Cansado do inglês 'de livro'? **Authentic English Flow** te conecta ao inglês real, falado por nativos. Aprenda com cenas curtas de situações cotidianas, decodificando a língua viva. Ganhe fluência natural e confiança para se comunicar de forma autêntica. Fale como um local!" },
-                { id: 'executive-delivery-mastery', title: '📈 Executive Delivery Mastery', description: 'Assuma o controle de seus projetos, reuniões e apresentações. Este curso master eleva suas habilidades em **gerenciamento de projetos**, **condução de reuniões produtivas** e **apresentações de alto impacto**. Transforme ideias em resultados, otimizando sua influência e eficácia profissional em qualquer contexto.' },
-                { id: 'email-mastery', title: '📧 Email Mastery', description: 'Transforme sua comunicação digital. **Email Mastery** te ensina a escrever e-mails claros, concisos e impactantes. Aprenda a engajar, economizar tempo e obter resultados. Domine a arte do e-mail profissional e eleve sua presença. Mensagens que realmente importam.' },
-                { id: 'civil-engineering-dynamics', title: '🏗️ Civil Engineering Dynamics', description: 'Projete e construa o futuro, sem barreiras. **Civil Engineering Dynamics** prepara você para a engenharia civil moderna. Domine o planejamento, design e gestão de projetos de infraestrutura, e adquira o **inglês técnico essencial** para colaborar e liderar globalmente. Sua expertise, reconhecida mundialmente.' },
-                { id: 'essential-kit', title: '🛠️ Essential Kit', description: 'Equipe-se para o sucesso. **The Professional\'s Essential Kit** oferece as ferramentas cruciais para otimizar sua comunicação, produtividade e impacto no ambiente de trabalho. Domine habilidades fundamentais para se destacar, liderar projetos e construir uma carreira sólida em qualquer área.' },
-                { id: 'interview-edge', title: '🤝 Interview Edge', description: 'Destaque-se em qualquer entrevista. **Interview Edge** prepara você para conquistar a vaga dos seus sonhos, dominando técnicas de comunicação, linguagem corporal e respostas estratégicas. Ganhe a confiança necessária para brilhar, superar a concorrência e garantir seu próximo desafio profissional.' },
-                { id: 'eloquent-politeness', title: '🎩 The Art of Eloquent Politeness', description: 'Aprimore sua comunicação com distinção. **The Art of Eloquent Politeness** te guia para uma expressão verbal que une elegância e respeito. Domine a escolha de palavras, o tom de voz e a linguagem corporal para interações mais harmoniosas, eficazes e memoráveis, tanto na vida pessoal quanto profissional. Fale com graça e impacto.' },
-                { id: 'legal-english-mastery', title: '⚖️ Legal English Mastery', description: 'Advogados, domine o inglês jurídico. **Strategic Legal English Communication** aprimora sua escrita e oratória para impacto máximo. Comunique-se com precisão e confiança em sua atuação global.' },
-                { id: 'c-suite-strategic-impact', title: '👑 C-Suite Strategic Impact', description: 'Para líderes no topo. **Executive Leadership Ascent: Strategic Impact** é o programa definitivo para C-levels que buscam transformar visão em resultados tangíveis. Aprimore sua tomada de decisões, desenvolva estratégias disruptivas e impulsione o crescimento sustentável. Lidere com propósito e conduza sua organização ao futuro, consolidando um legado de excelência.' },
-                { id: 'hospital-english-confidence', title: '🏥 Hospital English Confidence', description: 'Médicos, elevem sua prática global. **Global Medical English** aprimora sua comunicação em inglês para consultas, conferências e pesquisa. Ganhe confiança em cenários clínicos e profissionais. Domine a linguagem técnica e nuances culturais para excelência sem fronteiras.' },
-                { id: 'financial-market-intelligence', title: '💰 Financial Market Intelligence', description: 'Domine o cenário financeiro global. **Financial Market Intelligence** capacita você a tomar decisões estratégicas em finanças, bancos e investimentos. Desenvolva uma visão 360º, identifique oportunidades e lidere com excelência no mercado internacional.' },
-                { id: 'financial-intelligence-accountants', title: '📊 Financial Intelligence for Accountants', description: 'Transforme sua atuação contábil em um pilar estratégico. **Financial Intelligence for Accountants** capacita você a converter dados em **insights** decisivos para o negócio. Domine análises avançadas, relatórios estratégicos e consultoria de alto valor para impulsionar a lucratividade e o crescimento. Torne-se um parceiro indispensável para qualquer organização.' },
-                { id: 'code-communicate', title: '💻 Code & Communicate', description: 'Vá além do código. **Code & Communicate** é o curso de inglês feito para desenvolvedores que buscam fluência em discussões técnicas, reuniões de equipe e apresentações de projetos. Comunique suas soluções com clareza e confiança, expandindo suas oportunidades em qualquer empresa global.' },
-                { id: 'industrial-performance-accelerator', title: '🏭 Industrial Performance Accelerator', description: 'Acelere a performance e a inovação na indústria. **Industrial Performance Accelerator** é o curso para profissionais de Qualidade, Logística e Produção que buscam otimizar processos, implementar tecnologias e garantir um fluxo contínuo de resultados. Impulsione a excelência operacional e posicione sua fábrica no futuro.' },
-                { id: 'people-culture-optimiser', title: '👥 People & Culture Optimiser', description: 'Eleve sua comunicação em RH global. Capacitando você a conduzir entrevistas, apresentar políticas e gerenciar talentos internacionais com confiança e precisão. Domine a linguagem essencial para aquisição, desenvolvimento e engajamento, garantindo que seu RH fale a língua do sucesso global.' },
-                { id: 'market-influence', title: '🚀 Market Influence', description: 'Conquiste o mercado global. **English for Market Influence** te capacita a dominar a linguagem persuasiva em vendas e marketing. Crie descrições impactantes, apresentações poderosas e negocie com confiança. Amplie sua influência e feche mais negócios em inglês.' },
-                { id: 'tcf-tef-exam', title: '📝 TCF & TEF Exam', description: '**TCF & TEF Exam Accelerator** oferece estratégias precisas e prática intensiva para todas as seções: compreensão oral e escrita, e expressão oral e escrita. Conquiste a pontuação necessária para seus objetivos de estudo, imigração ou carreira, dominando o francês com confiança.' }
-            ];
+        // Script para criar e configurar o gráfico de proficiência com Chart.js
+        window.onload = function() {
+            // Get the context of the canvas element we want to select
+            const ctx = document.getElementById('proficiencyChart').getContext('2d');
 
-            const courseCards = document.querySelectorAll('.course-card');
-            const modal = document.getElementById('course-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalDescription = document.getElementById('modal-description');
-            const closeModalBtn = document.getElementById('close-modal');
+            // Define the data for the chart
+            const data = {
+                labels: ['Início', 'Mês 3', 'Mês 6', 'Mês 9', 'Mês 12'],
+                datasets: [
+                    {
+                        label: 'Curso Tradicional',
+                        data: [10, 15, 20, 25, 30],
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        fill: false,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Seu Treinamento Estratégico',
+                        data: [10, 35, 60, 80, 95],
+                        borderColor: 'rgb(54, 162, 235)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        fill: false,
+                        tension: 0.4
+                    }
+                ]
+            };
 
-            // Adiciona a funcionalidade de clique para abrir o modal
-            courseCards.forEach(card => {
-                // Recupera o ID do curso a partir do título do card para encontrar a descrição completa
-                const titleText = card.querySelector('h3').textContent;
-                const course = courses.find(c => c.title === titleText);
-
-                if (course) {
-                    card.addEventListener('click', () => {
-                        modalTitle.innerHTML = course.title;
-                        modalDescription.innerHTML = course.description;
-                        modal.classList.remove('hidden');
-                    });
+            // Configure the chart options
+            const options = {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Progressão de Fluência: Métodos Tradicionais vs. Seu Treinamento',
+                        color: 'white',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            color: 'white'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Proficiência (%)',
+                            color: 'white'
+                        },
+                        ticks: {
+                            color: 'white'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tempo de Estudo',
+                            color: 'white'
+                        },
+                        ticks: {
+                            color: 'white'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
                 }
-            });
+            };
 
-            closeModalBtn.addEventListener('click', () => {
-                modal.classList.add('hidden');
+            // Create the chart instance
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: data,
+                options: options
             });
-
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
-                }
-            });
-        });
+        };
     </script>
+
 </body>
 </html>
